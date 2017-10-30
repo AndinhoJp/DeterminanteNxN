@@ -6,9 +6,7 @@
 package determinantenxn;
 
 import java.awt.event.KeyEvent;
-import static java.lang.Math.random;
 import java.util.Random;
-import javax.security.auth.callback.ConfirmationCallback;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -18,19 +16,23 @@ import javax.swing.table.DefaultTableModel;
  * @author ander
  */
 public class jFrameInterface extends javax.swing.JFrame {
-
+    
     int tamanho = 0;
     double[][] matriz = new double[tamanho][tamanho];
 
     public jFrameInterface() {
         initComponents();
         jFormattedTextFieldTamanhoMatriz.setText("0");
-
+        this.setLocationRelativeTo(null);
     }
 
     public static double determinante(double[][] matriz) {
         int i, j, k;
         double det;
+        if(matriz.length == 1){
+            return matriz[0][0];
+        }
+        
         if (matriz.length == 2) {
             det = (matriz[0][0] * matriz[1][1]) - (matriz[1][0] * matriz[0][1]);
             return det;
@@ -83,7 +85,8 @@ public class jFrameInterface extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Calculadora de determinante");
-        setBackground(new java.awt.Color(0, 255, 204));
+        setBackground(new java.awt.Color(255, 255, 255));
+        setMinimumSize(new java.awt.Dimension(800, 600));
 
         jLabelTamanhoMatriz.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabelTamanhoMatriz.setText("Digite o tamanho da matriz:");
@@ -98,6 +101,7 @@ public class jFrameInterface extends javax.swing.JFrame {
         ));
         jScrollPaneMatriz.setViewportView(jTableMatriz);
 
+        jFormattedTextFieldTamanhoMatriz.setBackground(new java.awt.Color(230, 230, 230));
         jFormattedTextFieldTamanhoMatriz.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         jFormattedTextFieldTamanhoMatriz.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -107,6 +111,11 @@ public class jFrameInterface extends javax.swing.JFrame {
         jFormattedTextFieldTamanhoMatriz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFormattedTextFieldTamanhoMatrizActionPerformed(evt);
+            }
+        });
+        jFormattedTextFieldTamanhoMatriz.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jFormattedTextFieldTamanhoMatrizKeyPressed(evt);
             }
         });
 
@@ -143,6 +152,7 @@ public class jFrameInterface extends javax.swing.JFrame {
         jLabelValorDeterminante.setText("Valor do determinante:");
 
         jTextFieldValorDeterminante.setEditable(false);
+        jTextFieldValorDeterminante.setBackground(new java.awt.Color(255, 255, 255));
         jTextFieldValorDeterminante.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         jButtonRandom.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -216,7 +226,7 @@ public class jFrameInterface extends javax.swing.JFrame {
 
     private void jFormattedTextFieldTamanhoMatrizFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFormattedTextFieldTamanhoMatrizFocusLost
         if (Integer.parseInt(jFormattedTextFieldTamanhoMatriz.getText()) < 0) {
-            JOptionPane.showConfirmDialog(null, "O tamanho informado é inválido. Confira o tamanho e tente novamente!");
+            JOptionPane.showMessageDialog(null, "O tamanho informado é inválido. Confira o tamanho e tente novamente!");
         } else {
             tamanho = Integer.parseInt(jFormattedTextFieldTamanhoMatriz.getText());
             ExibeMatriz(matriz, tamanho);
@@ -225,7 +235,7 @@ public class jFrameInterface extends javax.swing.JFrame {
 
     private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
         if (Integer.parseInt(jFormattedTextFieldTamanhoMatriz.getText()) < 0) {
-            JOptionPane.showConfirmDialog(null, "O tamanho informado é inválido. Confira o tamanho e tente novamente!");
+            JOptionPane.showMessageDialog(null, "O tamanho informado é inválido. Confira o tamanho e tente novamente!");
         } else {
             tamanho = Integer.parseInt(jFormattedTextFieldTamanhoMatriz.getText());
             ExibeMatriz(matriz, tamanho);
@@ -235,7 +245,7 @@ public class jFrameInterface extends javax.swing.JFrame {
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
         Object[] options = {"Sim", "Nao"};
         int opc = JOptionPane.showOptionDialog(null,
-                "Deseja realmente sair do Sistema?",
+                "Deseja realmente sair da calculadora?",
                 "", 0, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
         if (opc == 0) {
             JFrame jFrameCredito = new jFrameCredito();
@@ -249,15 +259,13 @@ public class jFrameInterface extends javax.swing.JFrame {
         double[][] mat = new double[tamanho][tamanho];
         jTableMatriz.getSelectionModel().clearSelection();
         if (tamanho < 0) {
-            JOptionPane.showConfirmDialog(null, "O tamanho informado é inválido. Confira o tamanho e tente novamente!");
+            JOptionPane.showMessageDialog(null, "O tamanho informado é inválido. Confira o tamanho e tente novamente!");
         }
         int i, j;
         for (i = 0; i < tamanho; i++) {
             for (j = 0; j < tamanho; j++) {
                 mat[i][j] = Float.parseFloat(jTableMatriz.getValueAt(i, j).toString());
-                System.out.print(mat[i][j] + "\t");
             }
-            System.out.println("\n");
         }
         jTextFieldValorDeterminante.setText(String.valueOf(determinante(mat)));
     }//GEN-LAST:event_jButtonCalcularActionPerformed
@@ -265,15 +273,14 @@ public class jFrameInterface extends javax.swing.JFrame {
     private void jButtonRandomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRandomActionPerformed
         int i, j;
         Random generator = new Random();
-        double num = generator.nextInt(10) + 1;
+        double num = generator.nextInt(200) + 1;
         tamanho = Integer.parseInt(jFormattedTextFieldTamanhoMatriz.getText());
         if (tamanho < 0) {
             JOptionPane.showConfirmDialog(null, "O tamanho informado é inválido. Confira o tamanho e tente novamente!");
         }
         for (i = 0; i < tamanho; i++) {
             for (j = 0; j < tamanho; j++) {
-                num = generator.nextInt(10)+1;
-                System.out.print(num + "\n");
+                num = generator.nextInt(20)+1;
                 jTableMatriz.setValueAt(num, i, j);
             }
         }
@@ -289,6 +296,17 @@ public class jFrameInterface extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButtonAtualizarKeyPressed
+
+    private void jFormattedTextFieldTamanhoMatrizKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFormattedTextFieldTamanhoMatrizKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (Integer.parseInt(jFormattedTextFieldTamanhoMatriz.getText()) < 0) {
+                JOptionPane.showConfirmDialog(null, "O tamanho informado é inválido. Confira o tamanho e tente novamente!");
+            } else {
+                tamanho = Integer.parseInt(jFormattedTextFieldTamanhoMatriz.getText());
+                ExibeMatriz(matriz, tamanho);
+            }
+        }
+    }//GEN-LAST:event_jFormattedTextFieldTamanhoMatrizKeyPressed
 
     /**
      * @param args the command line arguments

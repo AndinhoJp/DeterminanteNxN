@@ -20,10 +20,14 @@ public class jFrameCredito extends javax.swing.JFrame {
      */
     public jFrameCredito() {
         initComponents();
-        jTextPaneNome.setText("Anderson Sergio Oyama\tRA:91804\n" +
-                              "Gregório Granado Magalhãe \tRA:88392\n"
+        this.setLocationRelativeTo(null);
+        jTextPaneNome.setText("Anderson Sergio Oyama \tRA: 91804\n" +
+                              "Gregório Granado Magalhãe \tRA: 88392\n" +
+                              "Lucas Matheus B. Araujo \tRA: 105417\n" +
+                              "Vinícius da Posta Regatieira \tRA: 104016\n"
+                              
 );
-        Timer t = new Timer(10000, new ActionListener() {
+        Timer t = new Timer(5000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
@@ -44,6 +48,7 @@ public class jFrameCredito extends javax.swing.JFrame {
         jLabelCredito = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPaneNome = new javax.swing.JTextPane();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
@@ -54,6 +59,8 @@ public class jFrameCredito extends javax.swing.JFrame {
         jTextPaneNome.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jScrollPane1.setViewportView(jTextPaneNome);
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/determinantenxn/static_qr_code_without_logo.jpg"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -63,9 +70,13 @@ public class jFrameCredito extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelCredito)
-                        .addGap(0, 81, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(87, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(86, 86, 86))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -73,8 +84,10 @@ public class jFrameCredito extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabelCredito)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -116,6 +129,7 @@ public class jFrameCredito extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelCredito;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextPane jTextPaneNome;
