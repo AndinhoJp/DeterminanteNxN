@@ -24,7 +24,7 @@ public class jFrameCredito extends javax.swing.JFrame {
         jTextPaneNome.setText("Anderson Sergio Oyama \tRA: 91804\n" +
                               "Gregório Granado Magalhãe \tRA: 88392\n" +
                               "Lucas Matheus B. Araujo \tRA: 105417\n" +
-                              "Vinícius da Posta Regatieira \tRA: 104016\n"
+                              "Vinícius da Costa Regatieira \tRA: 104016\n"
                               
 );
         Timer t = new Timer(5000, new ActionListener() {
